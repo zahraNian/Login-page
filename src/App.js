@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import Login from './login.js';
+import CreateAccount from './create.js'
+import styled from "styled-components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Total =styled.div({
+    display:'flex',
+    flexDirection:'Row',
+    justifyContent:'center',
+    alignItem:'center',
+    height:'100%'
+})
+
+export default function App(){
+  return(
+    <Total>
+      <CreateAccount/>
+    </Total>
+  )
 }
-
-export default App;
