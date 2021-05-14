@@ -11,3 +11,23 @@ html, body, #root{
   75% {border-bottom:2px solid  rgb(128, 238, 248);}
   100% {border-left:2px solid rgb(128, 238, 248);}
 }
+@keyframes btn-anim1 {
+  0% {margin-left: 0px;}
+  20% {margin-left: 4px;}
+  25% {margin-left: 0px;}
+  30% {margin-left: 4px;}
+  35% {margin-left: 0px;}
+  40% {margin-left: 4px;}
+  45% {margin-left: 0px;}
+  50% {margin-left: 4px;}
+  55% {margin-left: 0px;}
+  60% {margin-left: 4px;}
+  65% {margin-left: 0px;}
+  70% {margin-left: 4px;}
+  75% {margin-left: 0px;}
+  80% {margin-left: 4px;}
+  85% {margin-left: 0px;}
+  90% {margin-left: 4px;}
+  95% {margin-left: 0px;}
+  100% {margin-left: 4px;}
+}

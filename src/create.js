@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
 import './App.css';
+import csshake from 'csshake'
 
 
 const Total =styled.div({
@@ -29,8 +30,9 @@ const Box = styled.div({
     '&>a':{
         marginTop:'25px',
         color:'#fff',
-        textDecoration:'none'
-        
+        textDecoration:'none',
+        '&:hover':{
+        }
     }
 })
 const UserBox = styled.div({
@@ -86,7 +88,7 @@ export default function CreateAccount(){
         <Total>
             <Box>
                 <h2>Create an account</h2>
-                <form onSubmit={()=>{localStorage.setItem(user, JSON.stringify(information));history.push('/login')}}>
+                <form onSubmit={()=>{if(pass == repeatPass){localStorage.setItem(user, JSON.stringify(information));history.push('/login')} else{alert('password And repeatpassword are not same!')}  }}>
                     <UserBox >
                         <Lable >Email</Lable>
                         <Input type='text' onChange={(e)=>{setEmail(e.target.value)}} ></Input>   
@@ -97,11 +99,11 @@ export default function CreateAccount(){
                     </UserBox>
                     <UserBox>
                         <Lable>PassWord</Lable>
-                        <Input type='text' onChange={(e)=>{setPass(e.target.value)}}></Input>
+                        <Input type='password' onChange={(e)=>{setPass(e.target.value)}}></Input>
                     </UserBox>
                     <UserBox>
-                        <Lable> repeat PassWord</Lable>
-                        <Input type='text' onChange={(e)=>{setRepeatPass(e.target.value)}}></Input>
+                        <Lable> Repeat PassWord</Lable>
+                        <Input type='password' onChange={(e)=>{setRepeatPass(e.target.value)}}></Input>
                     </UserBox>
                     <Submit type='submit'></Submit>
                 </form>

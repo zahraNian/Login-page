@@ -69,28 +69,33 @@ const SubmitBotton = styled.input({
 export default function Login(){
    const [user, setUser] = useState()
    const [pass, setPass] = useState()
+   const [condition, setcondition]=useState(false)
    const history = useHistory()
 
+  
    const info = JSON.parse(localStorage.getItem('info'))
-   function Submit(){
+   function Submit(e){
     if(info.User == user && info.Pass == pass)
-    history.push('/')
-    else
-    alert('oops')
+    history.push('/home')
+    else{
+        setcondition(true)
+        e.preventDefault();
+        setTimeout(()=>window.location.reload(),700)
+    }
+    
 }
-
     return(
         <Total>
-            <Box>
+            <Box style={{animation:condition?'btn-anim1 1s':null}}>
                 <h2>Login</h2>
-                <form onSubmit={()=>{Submit()}}>
+                <form onSubmit={(e)=>{Submit(e)}}>
                     <UserBox >
                         <Lable >UserName</Lable>
                         <Input type='text' onChange={(e)=>{setUser(e.target.value)}} ></Input>   
                     </UserBox>
                     <UserBox>
                         <Lable>PassWord</Lable>
-                        <Input type='text' onChange={(e)=>{setPass(e.target.value)}}></Input>
+                        <Input type='password' onChange={(e)=>{setPass(e.target.value)}}></Input>
                     </UserBox>
                     <SubmitBotton type='submit'></SubmitBotton>
                 </form>
