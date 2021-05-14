@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import {useState} from 'react'
 import './App.css';
 
@@ -15,7 +15,6 @@ const Box = styled.div({
     width:'400px',
     height:'450px',
     color:'#fff',
-    fontSize:'40px',
     backgroundColor:'#0d141e',
     borderRadius:'10px',
     display:'flex',
@@ -23,7 +22,14 @@ const Box = styled.div({
     justifyContent:'flex-start',
     alignItems:'center',
     '&>h2':{
-        marginTop:'20px'
+        marginTop:'20px',
+        fontSize:'45px',
+    },
+    '&>a':{
+        marginTop:'30px',
+        color:'#fff',
+        textDecoration:'none'
+        
     }
 })
 const UserBox = styled.div({
@@ -49,11 +55,9 @@ const Lable = styled.label({
     width:'100%'
 
 })
-const Submit = styled.input({
-    '&:hover':{
-        animation:"btn-anim 5s infinite",
-    },
-    borderRadius:'15px',
+const SubmitBotton = styled.input({
+    animation:"btn-anim 3s infinite",
+    borderRadius:'10px',
     marginTop:'50px',
     width:'80px',
     height:'30px',
@@ -65,12 +69,21 @@ const Submit = styled.input({
 export default function Login(){
    const [user, setUser] = useState()
    const [pass, setPass] = useState()
+   const history = useHistory()
+
+   const info = JSON.parse(localStorage.getItem('info'))
+   function Submit(){
+    if(info.User == user && info.Pass == pass)
+    history.push('/')
+    else
+    alert('oops')
+}
 
     return(
         <Total>
             <Box>
                 <h2>Login</h2>
-                <form>
+                <form onSubmit={()=>{Submit()}}>
                     <UserBox >
                         <Lable >UserName</Lable>
                         <Input type='text' onChange={(e)=>{setUser(e.target.value)}} ></Input>   
@@ -79,8 +92,9 @@ export default function Login(){
                         <Lable>PassWord</Lable>
                         <Input type='text' onChange={(e)=>{setPass(e.target.value)}}></Input>
                     </UserBox>
-                    <Submit type='submit'></Submit>
+                    <SubmitBotton type='submit'></SubmitBotton>
                 </form>
+                <Link to='/'>don't have an account?</Link>
             </Box>
         </Total>
     )

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import {Link} from "react-router-dom"
+import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
 import './App.css';
 
@@ -13,9 +14,8 @@ const Total =styled.div({
 })
 const Box = styled.div({
     width:'400px',
-    height:'600px',
+    height:'630px',
     color:'#fff',
-    fontSize:'40px',
     backgroundColor:'#0d141e',
     borderRadius:'10px',
     display:'flex',
@@ -25,6 +25,12 @@ const Box = styled.div({
     '&>h2':{
         marginTop:'20px',
         fontSize:'35px'
+    },
+    '&>a':{
+        marginTop:'25px',
+        color:'#fff',
+        textDecoration:'none'
+        
     }
 })
 const UserBox = styled.div({
@@ -51,10 +57,9 @@ const Lable = styled.label({
 
 })
 const Submit = styled.input({
-    '&:hover':{
-        animation:"btn-anim 5s infinite",
-    },
-    borderRadius:'15px',
+
+    animation:"btn-anim 3s infinite",
+    borderRadius:'10px',
     marginTop:'50px',
     width:'80px',
     height:'30px',
@@ -68,16 +73,23 @@ export default function CreateAccount(){
    const [pass, setPass] = useState()
    const [email, setEmail] = useState()
    const [repeatPass, setRepeatPass] = useState()
+   const history = useHistory()
 
+    const information ={
+        User : user,
+        Pass : pass,
+        Email : email,
+        RepeatPass : repeatPass
+    }
 
     return(
         <Total>
             <Box>
                 <h2>Create an account</h2>
-                <form>
+                <form onSubmit={()=>{localStorage.setItem(user, JSON.stringify(information));history.push('/login')}}>
                     <UserBox >
                         <Lable >Email</Lable>
-                        <Input type='text' onChange={(e)=>{setUser(e.target.value)}} ></Input>   
+                        <Input type='text' onChange={(e)=>{setEmail(e.target.value)}} ></Input>   
                     </UserBox>
                     <UserBox >
                         <Lable >UserName</Lable>
@@ -89,10 +101,11 @@ export default function CreateAccount(){
                     </UserBox>
                     <UserBox>
                         <Lable> repeat PassWord</Lable>
-                        <Input type='text' onChange={(e)=>{setPass(e.target.value)}}></Input>
+                        <Input type='text' onChange={(e)=>{setRepeatPass(e.target.value)}}></Input>
                     </UserBox>
                     <Submit type='submit'></Submit>
                 </form>
+                <Link to='/login'> have an account?</Link>
             </Box>
         </Total>
     )
